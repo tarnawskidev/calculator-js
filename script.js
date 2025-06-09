@@ -1,11 +1,38 @@
 const calcBody = document.querySelector("#calcBody");
+const display = document.querySelector("#display");
+const clear = document.querySelector("#clear");
+const equal = document.querySelector("#equal");
+const operators = Array.from(document.querySelectorAll(".operator"));
 
 let number1 = "";
 let number2 = "";
 let operator = "";
 
+let currentNum = "";
+
 
 generateCalc();
+
+for (let x in operators) {
+    operators[x].addEventListener("click", ()=> {
+        number1 = currentNum;
+        operator = operators[x].id;
+        currentNum = "";
+        display.textContent = "";
+    });
+}
+
+
+clear.addEventListener("click", () => {
+    currentNum = "";
+    display.textContent = currentNum;
+});
+
+equal.addEventListener("click", () => {
+    number2 = currentNum;
+    currentNum = operate(number1, number2, operator);
+    display.textContent = currentNum;
+});
 
 //function that performs operation on two numbers
 function operate(num1, num2, operator) {
@@ -23,7 +50,7 @@ function operate(num1, num2, operator) {
 
 //functions for math logic
 function add(num1, num2) {
-    return num1 + num2;
+    return Number(num1) + Number(num2);
 }
 
 function subtract(num1, num2) {
@@ -46,7 +73,8 @@ function generateCalc() {
         button.textContent = i;
         button.className ="calcButton";
         button.addEventListener("click", () => {
-            console.log(button.id)
+            display.textContent += button.id;
+            currentNum += button.id;
         })
         calcBody.appendChild(button);
     }

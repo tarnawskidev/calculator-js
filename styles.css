@@ -1,3 +1,10 @@
+#display {
+    border: 1px solid black;
+    height: 50px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
 #calcBody {
     display: flex;
     justify-content: center;
@@ -8,6 +15,7 @@
 #operators{
     display: flex;
     width: 300px;
+    flex-wrap: wrap;
 }
 
 .calcButton {
